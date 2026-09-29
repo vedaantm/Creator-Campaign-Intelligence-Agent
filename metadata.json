@@ -1,0 +1,6 @@
+{
+  "name": "Creator Campaign Intelligence Agent",
+  "description": "End-to-end intelligence agent for YouTube creator campaigns: candidate scoring, risk simulation, briefing, compliance, Search demand capture, and live pulse monitoring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

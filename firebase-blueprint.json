@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with authentication and contact information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "createdAt", "lastLoginAt"]
+    },
+    "Campaign": {
+      "title": "Campaign",
+      "description": "YouTube creator marketing campaign entity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerEmail": { "type": "string", "format": "email" },
+        "memberEmails": {
+          "type": "array"
+        },
+        "name": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "active", "completed", "archived"]
+        },
+        "deletedAt": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["id", "ownerId", "ownerEmail", "name", "status", "createdAt", "updatedAt", "version"]
+    },
+    "Job": {
+      "title": "Job",
+      "description": "Background execution job tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "campaignId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "type": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["queued", "running", "succeeded", "failed", "cancelled"]
+        },
+        "cancelRequested": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "campaignId", "ownerId", "type", "status", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "Stores user profiles"
+    },
+    "/campaigns/{campaignId}": {
+      "schema": "Campaign",
+      "description": "Stores campaigns"
+    },
+    "/jobs/{jobId}": {
+      "schema": "Job",
+      "description": "Stores background jobs"
+    }
+  }
+}
